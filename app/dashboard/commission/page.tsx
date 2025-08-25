@@ -2,8 +2,18 @@
 
 import { useState } from 'react'
 
-// Mock commission data
-const mockCommissionRates = [
+// Mock commission data with proper types
+interface CommissionRate {
+  id: number
+  vendorName: string
+  category: string
+  currentRate: number
+  previousRate: number
+  effectiveDate: string
+  lastUpdated: string
+}
+
+const mockCommissionRates: CommissionRate[] = [
   {
     id: 1,
     vendorName: 'Tech Gadgets Store',
@@ -36,7 +46,7 @@ const mockCommissionRates = [
 export default function CommissionManagement() {
   const [commissionRates, setCommissionRates] = useState(mockCommissionRates)
   const [showModal, setShowModal] = useState(false)
-  const [editingRate, setEditingRate] = useState(null)
+  const [editingRate, setEditingRate] = useState<CommissionRate | null>(null)
   const [newRate, setNewRate] = useState({
     vendorName: '',
     category: '',

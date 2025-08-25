@@ -3,7 +3,18 @@
 import { useState } from 'react'
 
 // Mock data for development - will be replaced with real data
-const mockVendors = [
+interface Vendor {
+  id: number
+  businessName: string
+  email: string
+  status: string
+  appliedDate: string
+  commissionRate: number
+  totalProducts: number
+  totalSales: number
+}
+
+const mockVendors: Vendor[] = [
   {
     id: 1,
     businessName: 'Tech Gadgets Store',
@@ -38,7 +49,7 @@ const mockVendors = [
 
 export default function VendorsManagement() {
   const [vendors, setVendors] = useState(mockVendors)
-  const [selectedVendor, setSelectedVendor] = useState(null)
+  const [selectedVendor, setSelectedVendor] = useState<Vendor | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [filter, setFilter] = useState('all')
 
