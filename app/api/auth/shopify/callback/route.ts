@@ -3,8 +3,8 @@ import { shopify } from '@/lib/shopify/config'
 import { db, users, vendors } from '@/lib/db'
 
 export async function GET(request: NextRequest) {
-  if (!shopify) {
-    return NextResponse.json({ error: 'Shopify configuration not available' }, { status: 500 })
+  if (!shopify || !db) {
+    return NextResponse.json({ error: 'Services not available' }, { status: 500 })
   }
 
   try {
