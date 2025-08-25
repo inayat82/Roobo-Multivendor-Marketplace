@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { shopify } from '@/lib/shopify/config'
 
 export async function GET(request: NextRequest) {
+  // Import at runtime to avoid build issues
+  const { getShopifyClient } = await import('@/lib/shopify/client')
+  const shopify = getShopifyClient()
+  
   if (!shopify) {
     return NextResponse.json({ error: 'Shopify configuration not available' }, { status: 500 })
   }

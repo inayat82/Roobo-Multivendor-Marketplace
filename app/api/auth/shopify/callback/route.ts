@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { shopify } from '@/lib/shopify/config'
-import { db, users, vendors } from '@/lib/db'
 
 export async function GET(request: NextRequest) {
+  // Import at runtime to avoid build issues
+  const { getShopifyClient } = await import('@/lib/shopify/client')
+  const { getDatabase, users, vendors } = await import('@/lib/db/client')
+  
+  const shopify = getShopifyClient()
+  const db = getDatabase()
+  
   if (!shopify || !db) {
     return NextResponse.json({ error: 'Services not available' }, { status: 500 })
   }
@@ -21,7 +26,7 @@ export async function GET(request: NextRequest) {
 
     // Create or update user as Super Admin (store owner)
     const existingUser = await db.query.users.findFirst({
-      where: (users, { and, eq }) => and(
+      where: (users: any, { and, eq }: any) => and(
         eq(users.shopifyStoreId, session.shop),
         eq(users.role, 'super_admin')
       ),

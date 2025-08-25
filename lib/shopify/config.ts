@@ -1,5 +1,6 @@
 import { shopifyApi, ApiVersion } from '@shopify/shopify-api'
 import { restResources } from '@shopify/shopify-api/rest/admin/2024-07'
+import '@shopify/shopify-api/adapters/node'
 
 // Initialize Shopify API only if credentials are available (not during build time)
 export const shopify = process.env.SHOPIFY_API_KEY && process.env.SHOPIFY_API_SECRET 
