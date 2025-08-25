@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { shopify } from '@/lib/shopify/config'
 
 export async function GET(request: NextRequest) {
+  if (!shopify) {
+    return NextResponse.json({ error: 'Shopify configuration not available' }, { status: 500 })
+  }
+
   const url = new URL(request.url)
   const shop = url.searchParams.get('shop')
 

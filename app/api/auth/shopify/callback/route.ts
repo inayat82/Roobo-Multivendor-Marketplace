@@ -3,6 +3,10 @@ import { shopify } from '@/lib/shopify/config'
 import { db, users, vendors } from '@/lib/db'
 
 export async function GET(request: NextRequest) {
+  if (!shopify) {
+    return NextResponse.json({ error: 'Shopify configuration not available' }, { status: 500 })
+  }
+
   try {
     const callback = await shopify.auth.callback({
       rawRequest: request,
