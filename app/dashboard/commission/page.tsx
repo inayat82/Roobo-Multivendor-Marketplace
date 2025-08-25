@@ -81,7 +81,7 @@ export default function CommissionManagement() {
     setNewRate({ vendorName: '', category: '', rate: '', effectiveDate: '' })
   }
 
-  const handleEditRate = (rate) => {
+  const handleEditRate = (rate: CommissionRate) => {
     setEditingRate(rate)
     setNewRate({
       vendorName: rate.vendorName,
