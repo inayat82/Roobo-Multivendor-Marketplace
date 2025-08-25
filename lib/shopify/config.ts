@@ -1,4 +1,4 @@
-import { shopifyApi } from '@shopify/shopify-api'
+import { shopifyApi, ApiVersion } from '@shopify/shopify-api'
 import { restResources } from '@shopify/shopify-api/rest/admin/2024-07'
 
 if (!process.env.SHOPIFY_API_KEY || !process.env.SHOPIFY_API_SECRET) {
@@ -11,7 +11,7 @@ export const shopify = shopifyApi({
   scopes: ['read_products', 'write_products', 'read_orders', 'write_orders', 'read_customers'],
   hostName: process.env.APP_URL?.replace('https://', '') || 'localhost:3000',
   hostScheme: process.env.NODE_ENV === 'production' ? 'https' : 'http',
-  apiVersion: '2024-07',
+  apiVersion: ApiVersion.July24,
   isEmbeddedApp: true,
   restResources,
 })
