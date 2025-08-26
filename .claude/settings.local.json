@@ -12,7 +12,15 @@
       "Bash(vercel:*)",
       "Bash(cat:*)",
       "Bash(git config:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:multivendor-marketplace-jhv9oci97.vercel.app)",
+      "Bash(move app Temp/old/)",
+      "Bash(move components Temp/old/)",
+      "Bash(move lib Temp/old/)",
+      "Bash(move Docs Temp/old/)",
+      "Bash(move .next Temp/old/)",
+      "Bash(move node_modules Temp/old/)",
+      "Bash(powershell:*)"
     ],
     "deny": [],
     "ask": []

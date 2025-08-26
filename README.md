@@ -1,39 +1,28 @@
-# Roobo Multivendor Marketplace
+# Roobo Shopify Connector
 
-A Shopify app that transforms any Shopify store into a multivendor marketplace with comprehensive role-based access control.
+Simple Shopify app that connects to stores and shows "You are connected!" message.
 
-## Features
+## Configuration
 
-- **Multi-tenant Architecture**: Each Shopify store operates independently
-- **Role-based Access**: Super Admin, Vendor, and Sub-user roles
-- **Commission Management**: Flexible commission structures
-- **Real-time Analytics**: Dashboard for all user types
-- **Shopify Integration**: Seamless product and order synchronization
+Uses existing Shopify Partner app:
+- **API Key**: `c1e0d6ef2db55594c93dc1fc91cb33f2`
+- **Domain**: `marketplace.roobosoft.com`
+- **Scopes**: `read_shop` (minimal permission)
 
-## Tech Stack
+## Pages
 
-- **Frontend/Backend**: Next.js 14 (App Router)
-- **Database**: Neon PostgreSQL
-- **File Storage**: Vercel Blob
-- **Authentication**: Shopify OAuth + NextAuth
-- **Deployment**: Vercel
+- `/` - Connection form
+- `/success` - Success message
+- `/api/auth/shopify` - OAuth start
+- `/api/auth/callback` - OAuth callback
 
-## Getting Started
+## Usage
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Copy `.env.example` to `.env.local` and fill in your values
-4. Run development server: `npm run dev`
-
-## Environment Variables
-
-See `.env.example` for required environment variables.
-
-## Database Setup
-
-1. Create a Neon PostgreSQL database
-2. Run migrations: `npm run db:migrate`
+1. Enter Shopify store name
+2. Click "Connect Store"
+3. Authorize on Shopify
+4. See "🎉 You are Connected!" message
 
 ## Deployment
 
-Deploy to Vercel with automatic Neon integration.
+Deployed to: https://marketplace.roobosoft.com
