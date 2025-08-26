@@ -16,7 +16,7 @@ export function getShopifyClient() {
       hostName: process.env.APP_URL?.replace('https://', '') || 'localhost:3000',
       hostScheme: process.env.NODE_ENV === 'production' ? 'https' : 'http',
       apiVersion: ApiVersion.July24,
-      isEmbeddedApp: true,
+      isEmbeddedApp: false,
     })
   }
   return shopifyInstance

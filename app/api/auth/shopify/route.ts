@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
+  console.log('Shopify auth request:', request.url)
+  
   // Import at runtime to avoid build issues
   const { getShopifyClient } = await import('@/lib/shopify/client')
   const shopify = getShopifyClient()
   
   if (!shopify) {
+    console.error('Shopify client not initialized')
     return NextResponse.json({ error: 'Shopify configuration not available' }, { status: 500 })
   }
 
@@ -13,11 +16,13 @@ export async function GET(request: NextRequest) {
   const shop = url.searchParams.get('shop')
 
   if (!shop) {
+    console.error('No shop parameter provided')
     return NextResponse.json({ error: 'Shop parameter is required' }, { status: 400 })
   }
 
   // Validate shop domain
   const shopDomain = shop.includes('.myshopify.com') ? shop : `${shop}.myshopify.com`
+  console.log('Processing auth for shop:', shopDomain)
   
   try {
     const authRoute = await shopify.auth.begin({
@@ -28,9 +33,10 @@ export async function GET(request: NextRequest) {
       rawResponse: NextResponse,
     })
 
+    console.log('Auth route generated:', authRoute)
     return NextResponse.redirect(authRoute)
   } catch (error) {
     console.error('Shopify auth error:', error)
-    return NextResponse.json({ error: 'Authentication failed' }, { status: 500 })
+    return NextResponse.json({ error: 'Authentication failed', details: error.message }, { status: 500 })
   }
 }

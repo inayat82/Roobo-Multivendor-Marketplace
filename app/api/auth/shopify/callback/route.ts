@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
+  console.log('OAuth callback received:', request.url)
+  
   // Import at runtime to avoid build issues
   const { getShopifyClient } = await import('@/lib/shopify/client')
   const { getDatabase, users, vendors } = await import('@/lib/db/client')
@@ -8,8 +10,14 @@ export async function GET(request: NextRequest) {
   const shopify = getShopifyClient()
   const db = getDatabase()
   
-  if (!shopify || !db) {
-    return NextResponse.json({ error: 'Services not available' }, { status: 500 })
+  if (!shopify) {
+    console.error('Shopify client not available')
+    return NextResponse.json({ error: 'Shopify not configured' }, { status: 500 })
+  }
+  
+  if (!db) {
+    console.error('Database not available')  
+    return NextResponse.json({ error: 'Database not available' }, { status: 500 })
   }
 
   try {
@@ -18,6 +26,7 @@ export async function GET(request: NextRequest) {
       rawResponse: NextResponse,
     })
 
+    console.log('Shopify callback result:', callback)
     const { session } = callback
     
     if (!session?.shop || !session?.accessToken) {
