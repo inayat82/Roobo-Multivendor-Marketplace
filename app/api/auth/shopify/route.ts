@@ -37,6 +37,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(authRoute)
   } catch (error) {
     console.error('Shopify auth error:', error)
-    return NextResponse.json({ error: 'Authentication failed', details: error.message }, { status: 500 })
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    return NextResponse.json({ error: 'Authentication failed', details: errorMessage }, { status: 500 })
   }
 }
