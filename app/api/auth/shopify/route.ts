@@ -33,7 +33,15 @@ export async function GET(request: NextRequest) {
     authUrl.searchParams.set('redirect_uri', redirectUri)
     authUrl.searchParams.set('state', state)
 
-    console.log('Auth URL generated:', authUrl.toString())
+    console.log('=== OAUTH DEBUG INFO ===')
+    console.log('Shop Domain:', shopDomain)
+    console.log('API Key:', apiKey)
+    console.log('Scopes:', scopes)
+    console.log('Redirect URI:', redirectUri)
+    console.log('State:', state)
+    console.log('Full Auth URL:', authUrl.toString())
+    console.log('=== END DEBUG INFO ===')
+    
     return NextResponse.redirect(authUrl.toString())
   } catch (error) {
     console.error('Shopify auth error:', error)

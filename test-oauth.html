@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Shopify OAuth</title>
+</head>
+<body>
+    <h1>Manual OAuth URL Test</h1>
+    <p>Click the link below to test the OAuth URL manually:</p>
+    
+    <h3>Test Store OAuth URL:</h3>
+    <a href="https://quickstart-dc4ce7d5.myshopify.com/admin/oauth/authorize?client_id=c1e0d6ef2db55594c93dc1fc91cb33f2&scope=read_products,write_products,read_orders,write_orders,read_customers&redirect_uri=https://marketplace.roobosoft.com/api/auth/shopify/callback&state=test123" target="_blank">
+        Test OAuth with quickstart-dc4ce7d5.myshopify.com
+    </a>
+    
+    <h3>Manual URL Components:</h3>
+    <ul>
+        <li><strong>Shop:</strong> quickstart-dc4ce7d5.myshopify.com</li>
+        <li><strong>Client ID:</strong> c1e0d6ef2db55594c93dc1fc91cb33f2</li>
+        <li><strong>Scopes:</strong> read_products,write_products,read_orders,write_orders,read_customers</li>
+        <li><strong>Redirect URI:</strong> https://marketplace.roobosoft.com/api/auth/shopify/callback</li>
+        <li><strong>State:</strong> test123</li>
+    </ul>
+    
+    <p><strong>Expected Result:</strong> Should redirect to Shopify auth page, not "application cannot be found"</p>
+</body>
+</html>

@@ -26,8 +26,9 @@ function AppInstallContent() {
     console.log('Starting installation for shop:', shop)
     setInstalling(true)
     
-    // Redirect to OAuth flow
-    window.location.href = `/api/auth/shopify?shop=${shop}`
+    // Redirect to OAuth flow with your active store
+    const shopDomain = shop.includes('.myshopify.com') ? shop : `${shop}.myshopify.com`
+    window.location.href = `/api/auth/shopify?shop=${shopDomain}`
   }
 
   if (error) {

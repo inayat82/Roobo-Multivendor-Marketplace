@@ -1,1 +1,19 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/shopify/route": "app/api/auth/shopify/route.js",
+  "/auth/shopify-login/page": "app/auth/shopify-login/page.js",
+  "/auth/signup/page": "app/auth/signup/page.js",
+  "/app-install/page": "app/app-install/page.js",
+  "/auth/login/page": "app/auth/login/page.js",
+  "/test-install/page": "app/test-install/page.js",
+  "/page": "app/page.js",
+  "/install/page": "app/install/page.js",
+  "/api/auth/shopify/callback/route": "app/api/auth/shopify/callback/route.js",
+  "/api/auth/super-admin/route": "app/api/auth/super-admin/route.js",
+  "/dashboard/products/page": "app/dashboard/products/page.js",
+  "/dashboard/settings/page": "app/dashboard/settings/page.js",
+  "/dashboard/analytics/page": "app/dashboard/analytics/page.js",
+  "/dashboard/commission/page": "app/dashboard/commission/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/vendors/page": "app/dashboard/vendors/page.js"
+}
