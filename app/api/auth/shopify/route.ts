@@ -1,17 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import crypto from 'crypto'
 
 export async function GET(request: NextRequest) {
   console.log('Shopify auth request:', request.url)
   
-  // Import at runtime to avoid build issues
-  const { getShopifyClient } = await import('@/lib/shopify/client')
-  const shopify = getShopifyClient()
-  
-  if (!shopify) {
-    console.error('Shopify client not initialized')
-    return NextResponse.json({ error: 'Shopify configuration not available' }, { status: 500 })
-  }
-
   const url = new URL(request.url)
   const shop = url.searchParams.get('shop')
 
@@ -25,16 +17,24 @@ export async function GET(request: NextRequest) {
   console.log('Processing auth for shop:', shopDomain)
   
   try {
-    const authRoute = await shopify.auth.begin({
-      shop: shopDomain,
-      callbackPath: '/api/auth/shopify/callback',
-      isOnline: false,
-      rawRequest: request,
-      rawResponse: NextResponse,
-    })
+    const apiKey = process.env.SHOPIFY_API_KEY
+    const scopes = 'read_products,write_products,read_orders,write_orders,read_customers'
+    const redirectUri = `${process.env.APP_URL}/api/auth/shopify/callback`
+    const state = crypto.randomBytes(16).toString('hex')
+    
+    if (!apiKey) {
+      throw new Error('SHOPIFY_API_KEY not configured')
+    }
 
-    console.log('Auth route generated:', authRoute)
-    return NextResponse.redirect(authRoute)
+    // Build Shopify OAuth URL manually
+    const authUrl = new URL(`https://${shopDomain}/admin/oauth/authorize`)
+    authUrl.searchParams.set('client_id', apiKey)
+    authUrl.searchParams.set('scope', scopes)
+    authUrl.searchParams.set('redirect_uri', redirectUri)
+    authUrl.searchParams.set('state', state)
+
+    console.log('Auth URL generated:', authUrl.toString())
+    return NextResponse.redirect(authUrl.toString())
   } catch (error) {
     console.error('Shopify auth error:', error)
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
