@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
@@ -9,6 +11,23 @@ export default function Home() {
           <p className="text-xl text-gray-600 mb-8">
             Transform your Shopify store into a powerful multivendor marketplace
           </p>
+          
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <Link 
+              href="/auth/login"
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
+            >
+              Login to Dashboard
+            </Link>
+            <Link 
+              href="/install"
+              className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
+            >
+              Install App on Shopify
+            </Link>
+          </div>
+          
           <div className="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto">
             <h2 className="text-2xl font-semibold mb-4">Getting Started</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">

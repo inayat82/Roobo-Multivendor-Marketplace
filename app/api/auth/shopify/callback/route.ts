@@ -51,10 +51,9 @@ export async function GET(request: NextRequest) {
       })
     }
 
-    // Store session in your preferred session store
-    // For now, redirect to the app
-    const appUrl = `https://${session.shop}/admin/apps`
-    return NextResponse.redirect(appUrl)
+    // Super Admin gets redirected to marketplace dashboard
+    const dashboardUrl = `${process.env.APP_URL}/dashboard`
+    return NextResponse.redirect(dashboardUrl)
 
   } catch (error) {
     console.error('Shopify callback error:', error)

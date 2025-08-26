@@ -6,7 +6,7 @@ export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
   shopifyStoreId: varchar('shopify_store_id', { length: 255 }).notNull(),
   email: varchar('email', { length: 255 }).notNull(),
-  role: varchar('role', { length: 50 }).notNull().default('vendor'), // super_admin, vendor, sub_user
+  role: varchar('role', { length: 50 }).notNull().default('admin'), // super_admin, admin, sub_user
   status: varchar('status', { length: 50 }).notNull().default('pending'), // active, pending, suspended
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull()
@@ -50,10 +50,10 @@ export const vendorSettings = pgTable('vendor_settings', {
 // Sub-user Management
 export const subUsers = pgTable('sub_users', {
   id: uuid('id').defaultRandom().primaryKey(),
-  vendorId: uuid('vendor_id').references(() => vendors.id, { onDelete: 'cascade' }).notNull(),
-  userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
+  adminId: uuid('admin_id').references(() => users.id, { onDelete: 'cascade' }).notNull(), // The admin who owns this sub-user
+  userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(), // The sub-user's user record
   permissions: jsonb('permissions'), // array of permission strings
-  createdBy: uuid('created_by').references(() => users.id).notNull(),
+  createdBy: uuid('created_by').references(() => users.id).notNull(), // Who created this sub-user
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull()
 })

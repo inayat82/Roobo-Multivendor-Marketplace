@@ -1,9 +1,1 @@
-{
-  "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
-  "/api/auth/shopify/route": "app/api/auth/shopify/route.js",
-  "/api/auth/shopify/callback/route": "app/api/auth/shopify/callback/route.js",
-  "/dashboard/commission/page": "app/dashboard/commission/page.js",
-  "/dashboard/vendors/page": "app/dashboard/vendors/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
-}
+{}
